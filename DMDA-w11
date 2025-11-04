@@ -1,0 +1,69 @@
+- dnorm
+Program
+# Create a sequence of numbers between -10 and 10 incrementing by 0.1
+x <- seq(-10, 10, by = 0.1)
+# Choose mean = 0 and standard deviation = 1
+y <- dnorm(x, mean = 0, sd = 1)
+# Plot the normal distribution
+plot(x, y,
+main = "Normal Distribution (mean = 0, sd = 1)",
+xlab = "X",
+ylab = "Y",
+pch = 1) # open circles like in your image
+-PNORM
+# Create a sequence of numbers between -5 and 10 (better range for S-shape)
+x <- seq(-5, 10, by = 0.1)
+# Cumulative normal distribution with mean 2.5 and sd 2
+y <- pnorm(x, mean = 2.5, sd = 2)
+# Plot on screen
+plot(x, y, type = "l", col = "blue", lwd = 2,
+main = "Cumulative Normal Distribution (S-shape)",
+xlab = "x", ylab = "Cumulative Probability")
+# Save the plot to a file
+png(file = "pnorm_s_shape.png", width = 800, height = 600)
+plot(x, y, type = "l", col = "blue", lwd = 2,
+main = "Cumulative Normal Distribution (S-shape)",
+xlab = "x", ylab = "Cumulative Probability")
+dev.off()
+
+qnorm
+Program:
+# Create a sequence of probability values between 0.01 and 0.99
+x <- seq(0.01, 0.99, by = 0.02) # avoid 0 and 1, qnorm goes to -Inf/+Inf
+# Quantile function of normal distribution (inverse CDF)
+y <- qnorm(x, mean = 2, sd = 1)
+# Plot on screen
+plot(x, y, type = "l", col = "red", lwd = 2,
+main = "Quantile Function of Normal Distribution",
+xlab = "Probability", ylab = "Quantile Value")
+# Save the plot as PNG
+png(file = "qnorm_curve.png", width = 800, height = 600)
+plot(x, y, type = "l", col = "red", lwd = 2,
+main = "Quantile Function of Normal Distribution",
+xlab = "Probability", ylab = "Quantile Value")
+dev.off()
+
+
+
+rnorm
+Program:
+# Create a sample of 50 normally distributed numbers
+y <- rnorm(50)
+# Plot histogram on screen
+hist(y,
+breaks = 10, # number of bins
+col = "skyblue", # bar color
+border = "black", # bar border
+main = "Histogram of Normally Distributed Sample",
+xlab = "Values",
+ylab = "Frequency")
+# Save the histogram as PNG
+png(file = "rnorm_histogram.png", width = 800, height = 600)
+hist(y,
+breaks = 10,
+col = "skyblue",
+border = "black",
+main = "Histogram of Normally Distributed Sample",
+xlab = "Values",
+ylab = "Frequency")
+dev.off()
