@@ -1,0 +1,44 @@
+dbinom
+Program:
+# Create a sequence of numbers from 0 to 50
+x <- seq(0, 50, by = 1)
+# Binomial distribution with n=50, p=0.5
+y <- dbinom(x, size = 50, prob = 0.5)
+# Plot on screen with dots only
+plot(x, y,
+type = "p", # points only
+pch = 19, # solid dots
+col = "darkblue", # dot color
+cex = 1.5, # dot size
+main = "Binomial Distribution (n=50, p=0.5)",
+xlab = "Number of Successes",
+ylab = "Probability")
+# Save the plot as PNG
+png(file = "dbinom_dots.png", width = 800, height = 600)
+plot(x, y,
+type = "p",
+pch = 19,
+col = "darkblue",
+cex = 1.5,
+main = "Binomial Distribution (n=50, p=0.5)",
+xlab = "Number of Successes",
+ylab = "Probability")
+dev.off()
+
+
+Pbinom
+Program:
+# Probability of getting 26 or less heads from a 51 tosses of a coin.
+x <- pbinom(26,51,0.5)
+print(x)
+
+qbinom
+Program:
+x <- qbinom(0.25,51,1/2)
+print(x)
+
+
+rbinom
+Program:
+x <- rbinom(8,150,.4)
+print(x)
