@@ -1,0 +1,77 @@
+1)Time series
+snowfall <- c(790,1170.8,860.1,1330.6,630.4,911.5,
+683.5,996.6,783.2,982,881.8,1021)
+
+snowfall_timeseries <- ts(snowfall, start = c(2013, 1), frequency = 12)
+# Printing the time series data.
+print(snowfall_timeseries)
+
+plot(snowfall_timeseries,
+main = "Monthly Snowfall Time Series",
+xlab = "Time (Months)",
+ylab = "Snowfall (mm)",
+col = "blue",
+type = "o")
+
+model <- lm(snowfall_timeseries ~ time(snowfall_timeseries))
+
+plot(snowfall_timeseries,
+main = "Snowfall Over Time with Trend Line",
+xlab = "Time (Years)",
+ylab = "Snowfall (mm)",
+col = "blue",
+type = "o")
+abline(model, col = "red", lwd = 2)
+
+
+2)Non linear
+
+
+xvalues <- c(1.6,2.1,2,2.23,3.71,3.25,3.4,3.86,1.19,2.21)
+yvalues <- c(5.19,7.43,6.94,8.11,18.75,14.88,16.06,19.12,3.21,7.58)
+
+plot(xvalues, yvalues,
+main = "Nonlinear Least Squares (NLS) Fit",
+xlab = "X Values",
+ylab = "Y Values",
+col = "blue",
+pch = 16)
+
+model <- nls(yvalues ~ b1*xvalues^2 + b2,
+start = list(b1 = 1, b2 = 3))
+
+new.data <- data.frame(xvalues = seq(min(xvalues), max(xvalues), length.out = 100))
+
+lines(new.data$xvalues, predict(model, newdata = new.data),
+col = "red", lwd = 2)
+
+cat("Sum of squared residuals:\n")
+print(sum(resid(model)^2))
+cat("Confidence intervals for coefficients:\n")
+print(confint(model))
+
+
+3)Decision tree
+
+data(iris)
+
+library(C50)
+library(caTools)
+
+set.seed(7)
+
+split <- sample.split(iris$Species, SplitRatio = 0.7)
+training <- subset(iris, split == TRUE)
+testing <- subset(iris, split == FALSE)
+
+model <- C5.0(Species ~ ., data = training)
+
+summary(model)
+
+pred <- predict(model, testing[,-5])
+
+a <- table(testing$Species, pred)
+accuracy <- sum(diag(a)) / sum(a)
+print(paste("Accuracy:", round(accuracy, 3)))
+
+plot(model)
