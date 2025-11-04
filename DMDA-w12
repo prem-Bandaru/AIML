@@ -1,0 +1,24 @@
+a) χ2-test
+Program:
+# Load the MASS library to access the Cars93 dataset
+library(MASS)
+# Display the structure of Cars93
+print(str(Cars93))
+# Create a contingency table of AirBags vs Type
+car_data <- table(Cars93$AirBags, Cars93$Type)
+print(car_data)
+# Perform the Chi-Square test on the table
+chi_result <- chisq.test(car_data)
+print(chi_result)
+
+
+b)t-test
+
+x <- c(0.593, 0.142, 0.329, 0.691, 0.231, 0.793, 0.519, 0.392, 0.418) t.test(x,
+alternative="greater", mu=0.3)
+
+c)F-test
+
+x<-c(18,19,22,25,27,28,41,45,51,55)
+y<-c(14,15,15,17,18,22,25,25,27,34)
+print(var.test(x,y))
